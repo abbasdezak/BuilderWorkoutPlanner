@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "395241937047",
+    "project_id": "workout-b3a5b",
+    "storage_bucket": "workout-b3a5b.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:395241937047:android:998fd30fe583ceb79631d2",
+        "android_client_info": {
+          "package_name": "com.aed.builderworkoutplanner"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "395241937047-5a8uqjqndl3efr0peds1dbirr00gbiar.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.aed.builderworkoutplanner",
+            "certificate_hash": "f62a546847213999eb81dfa0ba03a5087ec6a3c3"
+          }
+        },
+        {
+          "client_id": "395241937047-er9hhcu3spc66q8bn6ti3lme4c4sloum.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbhZmFhBb0SSs6VVpG8RzKK3GG4k2r5iA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "395241937047-er9hhcu3spc66q8bn6ti3lme4c4sloum.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

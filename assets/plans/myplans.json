@@ -1,0 +1,256 @@
+{
+  "Plans": [
+    {
+      "Name": "Warm-Up",
+      "Splits": [
+        {
+          "Name": "Full-Body",
+          "img_url": "dds",
+          "exrcs": [
+            "Lacrosse Ball",
+            "Standing Calf Raise",
+            "Goblet Squat",
+            "Bodyweight Walking Lunge",
+            "Side Plank",
+            "Knee Push Up",
+            "Rack Lat Stretch"
+          ]
+        },
+        {
+          "Name": "Lower Body",
+          "img_url": "",
+          "exrcs": [
+            "Standing Calf Raise",
+            "IT Band Foam Roller",
+            "Prisoner Squat",
+            "Prisoner Squat (Hold at the Bottom)",
+            "Superman",
+            "Plank",
+            "Band Pull Apart"
+          ]
+        },
+        {
+          "Name": "Upper Body",
+          "img_url": "",
+          "exrcs": [
+            "Knee Push Up",
+            "Triceps Bench Dips",
+            "Arm Circles (Clockwise)",
+            "Arm Circles (Counter Clockwise)",
+            "Eccentric Only Pull Up",
+            "Zottman Curl - Dumbbell",
+            "90/90 Hip Crossover",
+            "Sit Up",
+            "Jump Squat"
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "3 DAY SPLIT PUSH PULL LEGS",
+      "Splits": [
+        {
+          "Name": "Day 1",
+          "img_url": "",
+          "exrcs": [
+            "Bench Press ",
+            "Overhead Press - Barbell",
+            "Incline Bench Press-Dumbbell",
+            "Lateral Raise - Dumbbell",
+            "One Arm Tricep Extension - Dumbbell",
+            "Triceps Pressdown"
+          ]
+        },
+        {
+          "Name": "Day 2",
+          "img_url": "",
+          "exrcs": [
+            "Pull Up",
+            "Dumbell Bent Over Row",
+            "Kroc Rows",
+            "Shrug - Barbell",
+            "Dumbbell Rear-Delt Fly",
+            "Bicep Curl"
+          ]
+        },
+        {
+          "Name": "Day 3",
+          "img_url": "",
+          "exrcs": [
+            "The Back Squat",
+            "Barbell Deadlift",
+            "Split Squat - Dumbbell",
+            "Romanian Deadlift - Barbell",
+            "Seated Leg Curl - Machine",
+            "Standing Calf Raise - Machine"
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "4 Day Split Full Body",
+      "Splits": [
+        {
+          "Name": "Day 1 \n Back and Biceps",
+          "img_url": "",
+          "exrcs": [
+            "Barbell Deadlift",
+            "Dumbbell Row",
+            "Lat Pulldown - Cable",
+            "Barbell Row",
+            "Seated Cable Row",
+            "Preacher Curl - Barbell",
+            "Concentration Curls",
+            "Bicep Curl"
+          ]
+        },
+        {
+          "Name": "Day 2 – Chest and Triceps",
+          "img_url": "",
+          "exrcs": [
+            "Bench Press ",
+            "Incline Bench Press-Dumbbell",
+            "Chest Dips",
+            "Cable Fly Crossovers",
+            "Dumbbell Bench Press",
+            "Skullcrusher - Barbell",
+            "Seated Two Arm Tricep Extension",
+            "Triceps Extension - Cable"
+          ]
+        },
+        {
+          "Name": "Day 3 - Quads, Hamstrings and Calves",
+          "img_url": "",
+          "exrcs": [
+            "The Back Squat",
+            "Leg Press- Machine",
+            "Hack Squat",
+            "Leg Extension - Machine",
+            "Straight Leg Deadlift",
+            "Seated Leg Curl - Machine",
+            "Standing Calf Raise",
+            "Seated Calf Raise"
+          ]
+        },
+        {
+          "Name": "Day 4 – Shoulders, Traps and Forearms",
+          "img_url": "",
+          "exrcs": [
+            "Seated Shoulder Press",
+            "Arnold Press",
+            "Lateral Raise - Dumbbell",
+            "Smith Machine- Bench Press",
+            "Upright Row - Barbell",
+            "Shrug - Barbell",
+            "Supinated Barbell Wrist Curl"
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "4 Day - Only Dumbbell",
+      "Splits": [
+        {
+          "Name": "Day 1: Upper Body",
+          "img_url": "",
+          "exrcs": [
+            "Dumbell Bent Over Row",
+            "Dumbbell Bench Press",
+            "Lateral Raise - Dumbbell",
+            "Dumbbell Pullover ",
+            "Bicep Curl(Dumbbell)",
+            "Seated Two Arm Tricep Extension",
+            "Shrug - Dumbbell"
+          ]
+        },
+        {
+          "Name": "Day 2: Lower Body",
+          "img_url": "",
+          "exrcs": [
+            "Goblet Squat",
+            "Dumbbell Stiff Leg ",
+            "Dumbbell Plie Squat",
+            "Dumbbell Hamstring Curl",
+            "Standing Calf Raise - Dumbbell",
+            "Plank"
+          ]
+        },
+        {
+          "Name": "Day 3: Upper Body",
+          "img_url": "",
+          "exrcs": [
+            "Dumbbell Row",
+            "Shoulder Press - Dumbbell",
+            "Incline Bench Press-Dumbbell",
+            "Chest Supported Dumbbell Row",
+            "Hammer Curl Dumbbell",
+            "Dumbbell Floor Press",
+            "Shrug - Dumbbell"
+          ]
+        },
+        {
+          "Name": "Day 4 – Shoulders, Traps and Forearms",
+          "img_url": "",
+          "exrcs": [
+            "Dumbbell Stiff Leg ",
+            "Reverse  Lunge - Dumbbell",
+            "Hip Thrust",
+            "Split Squat - Dumbbell",
+            "Standing Calf Raise - Dumbbell",
+            "Plank"
+          ]
+        }
+      ]
+    },
+    {
+      "Name": "3 Day Split Full Body",
+      "Splits": [
+        {
+          "Name": "Day 1",
+          "img_url": "",
+          "exrcs": [
+            "Goblet Squat",
+            "Dumbbell Bench Press",
+            "Dumbbell Row",
+            "Seated Dumbbell Press",
+            "Lunge",
+            "Bicep Curl(Dumbbell)",
+            "Triceps Extension - Barbell",
+            "Standing Calf Raise",
+            "Plank"
+          ]
+        },
+        {
+          "Name": "Day 2",
+          "img_url": "",
+          "exrcs": [
+            "Bench Press ",
+            "Machine Pec Deck",
+            "Leg Extension - Machine",
+            "Standing Leg Curls",
+            "Pull Up",
+            "Seated Lateral Raise - Dumbbell",
+            "Hammer Curl Dumbbell",
+            "Rope Tricep Extension",
+            "Plank"
+          ]
+        },
+        {
+          "Name": "Day 3",
+          "img_url": "",
+          "exrcs": [
+            "Barbell Deadlift",
+            "Incline Bench Press-Dumbbell",
+            "Lateral Raise - Dumbbell",
+            "Lat Pulldown - Cable",
+            "Leg Press- Machine",
+            "Bicep Curl (Barbell)",
+            "Skullcrusher - Barbell",
+            "Shrug - Dumbbell",
+            "Plank"
+          ]
+        }
+      ]
+    }
+  ]
+}
