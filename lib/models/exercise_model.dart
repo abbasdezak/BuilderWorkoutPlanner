@@ -28,33 +28,41 @@ class ExerciseModel {
       };
 }
 
+class Sets {
+  final int? reps;
+  final int? weights;
+  final int? setNumber;
+  Sets(this.setNumber, {this.reps, this.weights});
+}
+
 class Company {
-  Company( {
-    this.img,
-    this.exrcs,
+  Company({
+    this.sets,
+    this.usage,
+    this.howTo,
     this.sort,
-     this.id,
+    this.id,
     required this.name,
     this.imgurl,
     this.ischeck,
   });
-
-  List<Company>? exrcs;
+  List<Sets>? sets;
   int? id;
   String name;
   String? imgurl;
-  Widget? img;
-  int? ischeck;
+  String? usage;
+  String? howTo;
+  bool? ischeck;
   int? sort;
 
-  // factory Company.fromJson(Map<String, dynamic> json) => Company(
-  //       id: json["ID"],
-  //       name: json["NAME"],
-  //       usage: json["USAGE"],
-  //       howto: json["HOWTO"],
-  //       imgurl: json["IMGURL"],
-  //       ischeck: json["ISCHECK"],
-  //     );
+  factory Company.fromJson(Map<String, dynamic> json) => Company(
+        id: json["ID"],
+        name: json["NAME"],
+        usage: json["USAGE"],
+        howTo: json["HOWTO"],
+        imgurl: json["IMGURL"],
+        ischeck: false,
+      );
 
   Map<String, dynamic> toMap() => {
         "ID": id,

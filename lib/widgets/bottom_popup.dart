@@ -1,5 +1,6 @@
 import 'package:builderworkoutplanner/models/exercise_model.dart';
 import 'package:builderworkoutplanner/models/youtube_controller.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:youtube_player_flutter/youtube_player_flutter.dart';
 
@@ -19,9 +20,6 @@ class bottomPopUp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    String? ytId = YoutubePlayer.convertUrlToId(
-        '${(data == null) ? dataSecond!.imgurl : data![currentExercise!].imgurl}');
-
     return Container(
         height: size!.height * .5,
         child: SingleChildScrollView(
@@ -35,12 +33,13 @@ class bottomPopUp extends StatelessWidget {
                 child: Container(
                   height: size!.height * .3,
                   width: size!.width * .8,
-                  child: YoutubePlayer(
-                      controller: YoutubeController(address: '$ytId').ytController()),
+                  child: CachedNetworkImage(
+                    imageUrl: '${data![currentExercise!].imgurl}',
+                    placeholder: (context, url) =>
+                        Center(child: CircularProgressIndicator()),
+                    errorWidget: (context, url, error) => Icon(Icons.error),
+                  ),
                 ),
-              ),
-              SizedBox(
-                height: size!.height * .05,
               ),
               Center(
                 child: Text(
@@ -51,9 +50,32 @@ class bottomPopUp extends StatelessWidget {
                         fontSize: size!.height * .025,
                         fontWeight: FontWeight.bold)),
               ),
-              SizedBox(
-                height: 15,
+              Container(
+                margin: EdgeInsets.all(15),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Text(
+                        (data == null)
+                            ? dataSecond!.howTo!
+                            : data![currentExercise!].howTo!,
+                        style: TextStyle(
+                            fontSize: size!.height * .025,
+                            fontWeight: FontWeight.bold)),
+                    SizedBox(
+                      height: 15,
+                    ),
+                    Text(
+                        (data == null)
+                            ? dataSecond!.usage!
+                            : data![currentExercise!].usage!,
+                        style: TextStyle(
+                            fontSize: size!.height * .025,
+                            fontWeight: FontWeight.bold)),
+                  ],
+                ),
               ),
+
               // Container(
               //   padding: EdgeInsets.only(
               //       left: size!.width * .1, right: size!.width * .1),

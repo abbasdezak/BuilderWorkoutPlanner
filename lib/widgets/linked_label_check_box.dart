@@ -1,4 +1,3 @@
-
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -30,7 +29,7 @@ class LinkedLabelCheckbox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       padding: padding,
-      height: size.height * .1,
+      height: size.height * .15,
       child: Row(
         children: <Widget>[
           secondary,
@@ -45,22 +44,6 @@ class LinkedLabelCheckbox extends StatelessWidget {
                     color: Colors.black,
                     fontSize: 16,
                     fontWeight: FontWeight.normal),
-                recognizer: TapGestureRecognizer()
-                  ..onTap = () {
-                    showModalBottomSheet(
-                        isScrollControlled: true,
-                        shape: RoundedRectangleBorder(
-                            borderRadius: BorderRadius.only(
-                                topLeft: Radius.circular(10),
-                                topRight: Radius.circular(10))),
-                        context: context,
-                        builder: (BuildContext context) {
-                          return bottomPopUp(
-                              currentExercise: currentExercise,
-                              size: size,
-                              data: data);
-                        });
-                  },
               ),
             ),
           ),

@@ -49,6 +49,9 @@ dependencies:
       url: https://github.com/T-moz/youtube_player_flutter
       path: packages/youtube_player_flutter
   shared_preferences: 
+  animated_bottom_navigation_bar: ^1.0.1
+  cached_network_image: ^3.2.0
+  get: 
 
 
 dev_dependencies:

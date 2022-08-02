@@ -218,7 +218,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
     List<Company> mapToList = List.generate(maps.length, (index) {
       return Company(
         id: index,
-        ischeck: 0,
+        ischeck: false,
         name: maps[index]['NAME'],
         imgurl: (maps[index]["IMGURL"] != null) ? maps[index]["IMGURL"] : '',
       );
@@ -227,7 +227,7 @@ class _WorkoutPageState extends State<WorkoutPage> {
         widget.workoutNameLists!.length,
         (index) => Company(
               id: index,
-              ischeck: 0,
+              ischeck: false,
               name: widget.workoutNameLists![index],
               imgurl: mapToList
                       .firstWhere(

@@ -130,65 +130,7 @@ class _CalendarPageState extends State<CalendarPage> {
                         ),
                       ],
                     ),
-                    Container(
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(20),
-                          color: Colors.grey[200]),
-                      padding: EdgeInsets.all(10),
-                      margin: EdgeInsets.only(
-                          top: 10, left: 20, right: 20, bottom: 5),
-                      child: TableCalendar(
-                        focusedDay: selectedDay,
-                        firstDay: DateTime(1990),
-                        lastDay: DateTime(2050),
-                        calendarFormat: format,
-
-                        startingDayOfWeek: StartingDayOfWeek.sunday,
-                        daysOfWeekVisible: true,
-
-                        selectedDayPredicate: (DateTime date) {
-                          return isSameDay(selectedDay, date);
-                        },
-
-                        eventLoader: _getEventsfromDay,
-
-                        //To style the Calendar
-                        calendarStyle: CalendarStyle(
-                          isTodayHighlighted: true,
-                          selectedDecoration: BoxDecoration(
-                            color: Colors.blue[300],
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(8.0),
-                          ),
-                          selectedTextStyle: TextStyle(color: Colors.white),
-                          todayDecoration: BoxDecoration(
-                            color: Colors.purpleAccent,
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          defaultDecoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          weekendDecoration: BoxDecoration(
-                            shape: BoxShape.rectangle,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                        ),
-                        headerStyle: HeaderStyle(
-                          formatButtonVisible: false,
-                          titleCentered: true,
-                          formatButtonShowsNext: false,
-                          formatButtonDecoration: BoxDecoration(
-                            color: Colors.blue,
-                            borderRadius: BorderRadius.circular(5.0),
-                          ),
-                          formatButtonTextStyle: TextStyle(
-                            color: Colors.white,
-                          ),
-                        ),
-                      ),
-                    ),
+                    _calendar(),
                     Container(
                       width: size.width * .2,
                       height: 6,
@@ -258,6 +200,68 @@ class _CalendarPageState extends State<CalendarPage> {
             }
           }),
     );
+  }
+
+  Container _calendar() {
+    return Container(
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(20),
+                        color: Colors.grey[200]),
+                    padding: EdgeInsets.all(10),
+                    margin: EdgeInsets.only(
+                        top: 10, left: 20, right: 20, bottom: 5),
+                    child: TableCalendar(
+                      focusedDay: selectedDay,
+                      firstDay: DateTime(1990),
+                      lastDay: DateTime(2050),
+                      calendarFormat: format,
+
+                      startingDayOfWeek: StartingDayOfWeek.sunday,
+                      daysOfWeekVisible: true,
+
+                      selectedDayPredicate: (DateTime date) {
+                        return isSameDay(selectedDay, date);
+                      },
+
+                      eventLoader: _getEventsfromDay,
+
+                      //To style the Calendar
+                      calendarStyle: CalendarStyle(
+                        isTodayHighlighted: true,
+                        selectedDecoration: BoxDecoration(
+                          color: Colors.blue[300],
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        selectedTextStyle: TextStyle(color: Colors.white),
+                        todayDecoration: BoxDecoration(
+                          color: Colors.purpleAccent,
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        defaultDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        weekendDecoration: BoxDecoration(
+                          shape: BoxShape.rectangle,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                      ),
+                      headerStyle: HeaderStyle(
+                        formatButtonVisible: false,
+                        titleCentered: true,
+                        formatButtonShowsNext: false,
+                        formatButtonDecoration: BoxDecoration(
+                          color: Colors.blue,
+                          borderRadius: BorderRadius.circular(5.0),
+                        ),
+                        formatButtonTextStyle: TextStyle(
+                          color: Colors.white,
+                        ),
+                      ),
+                    ),
+                  );
   }
 }
 

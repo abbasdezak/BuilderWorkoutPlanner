@@ -48,7 +48,8 @@ class Prefs {
       jsonPlansModel = JsonPlansModel.fromJson(jsonDecode(plans!));
       return jsonPlansModel;
     } catch (e) {
-      return JsonPlansModel();
+      print(e);
+       return JsonPlansModel();
     }
   }
 

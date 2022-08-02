@@ -2,15 +2,20 @@ import 'dart:convert';
 
 import 'package:builderworkoutplanner/data.dart';
 import 'package:builderworkoutplanner/models/exercise_model.dart';
+import 'package:builderworkoutplanner/models/get_controller.dart';
 import 'package:builderworkoutplanner/models/json_plans_model.dart';
 import 'package:builderworkoutplanner/models/tab_models.dart';
 import 'package:builderworkoutplanner/pages/app_plans_page.dart';
 import 'package:builderworkoutplanner/pages/home_page.dart';
+import 'package:builderworkoutplanner/widgets/add_sets.dart';
 import 'package:builderworkoutplanner/widgets/bottom_popup.dart';
+import 'package:builderworkoutplanner/widgets/linked_label_check_box.dart';
 import 'package:builderworkoutplanner/widgets/listview_card.dart';
 import 'package:builderworkoutplanner/widgets/rounded_text_field.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:sqflite/sqflite.dart';
 import '../data.dart';
@@ -32,6 +37,7 @@ class _secondPageState extends State<secondPage> {
       new TextEditingController(text: 'My Random Plan 1');
   List<Tabs> tabWidgets = [];
   List<int> tabNames = [];
+  ExerciseController _exerciseController = Get.put(ExerciseController());
 
   @override
   void initState() {
@@ -77,72 +83,8 @@ class _secondPageState extends State<secondPage> {
       child: DefaultTabController(
         length: tabNames.length,
         child: Scaffold(
-          appBar: AppBar(
-              backgroundColor: Colors.blue[400],
-              bottom: TabBar(
-                  indicatorColor: Colors.white,
-                  isScrollable: true,
-                  tabs: tabNames
-                      .map(
-                        (e) => Tab(
-                          child: Row(children: [
-                            Text(
-                              'Day $e',
-                              style: TextStyle(
-                                  color: Colors.white,
-                                  fontWeight: FontWeight.bold,
-                                  fontSize: size.height * .025),
-                            ),
-                            (tabNames.length > 1)
-                                ? Container(
-                                    width: size.width * .05,
-                                    child: IconButton(
-                                        onPressed: () {
-                                          tabNames.remove(e);
-                                          tabWidgets.removeAt(e - 1);
-
-                                          tabNames = List.generate(
-                                              tabNames.length,
-                                              (index) => index + 1);
-
-                                          setState(() {});
-                                        },
-                                        icon: Icon(
-                                          Icons.close,
-                                          color: Colors.white,
-                                          size: size.width * .05,
-                                        )),
-                                  )
-                                : Center(),
-                          ]),
-                        ),
-                      )
-                      .toList()),
-              actions: [
-                Container(
-                  margin: EdgeInsets.only(right: size.width * .03),
-                  width: size.width * .7,
-                  child: Form(
-                    key: _formKey,
-                    child: TextFormField(
-                      style: TextStyle(
-                          fontSize: size.width * .054, color: Colors.white),
-                      controller: _nameControler,
-                      validator: (value) {
-                        return null;
-                      },
-                    ),
-                  ),
-                ),
-                Container(
-                    margin: EdgeInsets.only(
-                        right: size.width * .01, top: size.width * .01),
-                    child: IconButton(
-                        onPressed: () async {
-                          await onSaved(context);
-                        },
-                        icon: Icon(Icons.save))),
-              ]),
+          backgroundColor: Color.fromARGB(255, 0, 32, 80),
+          appBar: _appBar(context),
           body: TabBarView(
             children: tabWidgets.map((e) {
               return widgets(context, size,
@@ -154,109 +96,99 @@ class _secondPageState extends State<secondPage> {
     );
   }
 
+  AppBar _appBar(BuildContext context) {
+    return AppBar(
+      elevation: 0,
+      backgroundColor: Color.fromARGB(255, 0, 32, 80),
+      actions: [
+        Container(
+          margin: EdgeInsets.only(right: 20),
+          alignment: Alignment.center,
+          child: GestureDetector(
+            onTap: () {
+              // if (_exercoseController.selectedExercises.isNotEmpty) {
+              //   Get.to(() => secondPage());
+              // } else {
+              //   Get.snackbar('Required', 'At least one exercise required !',
+              //       snackPosition: SnackPosition.BOTTOM,
+              //       backgroundColor: Colors.grey[100],
+              //       icon: Icon(
+              //         Icons.warning,
+              //         color: Colors.red,
+              //       ),
+              //       margin: EdgeInsets.all(20));
+              // }
+            },
+            child: Text(
+              'Next',
+              style: TextStyle(fontSize: 18),
+            ),
+          ),
+        ),
+      ],
+      leading: IconButton(
+        icon: Icon(Icons.arrow_back_ios),
+        onPressed: () {
+          Navigator.pop(context);
+        },
+      ),
+    );
+  }
+
   Stack widgets(BuildContext context, Size size, int indexTab) {
     return Stack(children: [
       Column(
         children: [
-          SizedBox(
-            height: size.height * .03,
+          Container(
+            height: size.height * .15,
+            width: size.width,
+            margin: EdgeInsets.only(top: size.height * .02, left: 20),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  'Add Sets',
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontSize: size.height * .06,
+                      fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  'Workout creation',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: size.height * .024,
+                  ),
+                ),
+              ],
+            ),
           ),
-          Expanded(
-              child: (tabWidgets.isNotEmpty)
-                  ? ReorderableListView(
-                      children: tabWidgets[indexTab].wrkts!.map((e) {
-                        return GestureDetector(
-                          key: Key(e.name),
-                          onTap: () {
-                            showModalBottomSheet(
-                                isScrollControlled: true,
-                                shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.only(
-                                        topLeft: Radius.circular(10),
-                                        topRight: Radius.circular(10))),
-                                context: context,
-                                builder: (BuildContext context) {
-                                  return bottomPopUp(
-                                    size: size,
-                                    dataSecond: e,
-                                  );
-                                });
-                          },
-                          child: PlansCards(
-                            titleFontSize: size.width * .04,
-                            title: e.name,
-                            size: size,
-                            icon: IconButton(
-                              icon: Icon(Icons.delete),
-                              onPressed: () async {
-                                tabWidgets[indexTab].wrkts!.remove(e);
-                                setState(() {});
-                              },
-                            ),
-                          ),
-                        );
-                      }).toList(),
-                      onReorder: (int oldIndex, int newIndex) {
-                        setState(() {
-                          if (oldIndex < newIndex) {
-                            newIndex -= 1;
-                          }
-                          final item =
-                              tabWidgets[indexTab].wrkts!.removeAt(oldIndex);
-                          tabWidgets[indexTab].wrkts!.insert(newIndex, item);
-                        });
-                      },
-                    )
-                  : Center(
-                      child: Text('empty'),
-                    ))
+          Expanded(child: _listView(size))
         ],
       ),
-      Positioned(
-        bottom: 10,
-        left: size.width * .1,
-        right: size.width * .52,
-        child: ElevatedButton(
-          onPressed: () async {
-            var result = await Navigator.push(context,
-                MaterialPageRoute(builder: (BuildContext context) {
-              return AddExercise(tableData: tabWidgets[indexTab].wrkts);
-            })) as List<Company>?;
-            if (result != null) {
-              tabWidgets[indexTab].wrkts = result;
-            }
-
-            setState(() {});
-          },
-          child: Text(
-            "Add an Exercise",
-            style: TextStyle(
-                fontWeight: FontWeight.bold),
-          ),
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(secondColor))),
-        ),
-      ),
-      Positioned(
-        bottom: 10,
-        left: size.width * .52,
-        right: size.width * .1,
-        child: ElevatedButton(
-          onPressed: () async {
-            tabNames.add(tabNames.length + 1);
-            tabWidgets.add(Tabs(name: '', wrkts: []));
-            setState(() {});
-          },
-          child: Text(
-            "Add a Day",
-            style: TextStyle(
-               fontWeight: FontWeight.bold),
-          ),
-          style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Color(secondColor))),
-        ),
-      ),
     ]);
+  }
+
+  _listView(Size size) {
+    return Obx(() {
+      var exrcs = _exerciseController.selectedExercises;
+      return Container(
+        color: Colors.grey[100],
+        child: ListView.builder(
+            itemCount: exrcs.length,
+            itemBuilder: (context, index) {
+              return GestureDetector(
+                child: AddSets(
+                  exerciseImage: exrcs[index].imgurl!,
+                  exerciseName: exrcs[index].name,
+                  sets: exrcs[index].sets ?? [],
+                  onAddSet: () => _exerciseController.planDetailes(
+                      exrcs[index].sets.length ?? 0, Sets(1)),
+                ),
+              );
+            }),
+      );
+    });
   }
 
   onSaved(BuildContext context) async {
@@ -312,3 +244,127 @@ class _secondPageState extends State<secondPage> {
   //   }
   // }
 }
+
+
+
+
+
+
+  // _appBar(Size size, BuildContext context) async {
+  //   return AppBar(
+  //       backgroundColor: Colors.blue[400],
+  //       bottom: TabBar(
+  //           indicatorColor: Colors.white,
+  //           isScrollable: true,
+  //           tabs: tabNames
+  //               .map(
+  //                 (e) => Tab(
+  //                   child: Row(children: [
+  //                     Text(
+  //                       'Day $e',
+  //                       style: TextStyle(
+  //                           color: Colors.white,
+  //                           fontWeight: FontWeight.bold,
+  //                           fontSize: size.height * .025),
+  //                     ),
+  //                     (tabNames.length > 1)
+  //                         ? Container(
+  //                             width: size.width * .05,
+  //                             child: IconButton(
+  //                                 onPressed: () {
+  //                                   tabNames.remove(e);
+  //                                   tabWidgets.removeAt(e - 1);
+
+  //                                   tabNames = List.generate(
+  //                                       tabNames.length, (index) => index + 1);
+
+  //                                   setState(() {});
+  //                                 },
+  //                                 icon: Icon(
+  //                                   Icons.close,
+  //                                   color: Colors.white,
+  //                                   size: size.width * .05,
+  //                                 )),
+  //                           )
+  //                         : Center(),
+  //                   ]),
+  //                 ),
+  //               )
+  //               .toList()),
+  //       actions: [
+  //         Container(
+  //           margin: EdgeInsets.only(right: size.width * .03),
+  //           width: size.width * .7,
+  //           child: Form(
+  //             key: _formKey,
+  //             child: TextFormField(
+  //               style:
+  //                   TextStyle(fontSize: size.width * .054, color: Colors.white),
+  //               controller: _nameControler,
+  //               validator: (value) {
+  //                 return null;
+  //               },
+  //             ),
+  //           ),
+  //         ),
+  //         Container(
+  //             margin: EdgeInsets.only(
+  //                 right: size.width * .01, top: size.width * .01),
+  //             child: IconButton(
+  //                 onPressed: () async {
+  //                   await onSaved(context);
+  //                 },
+  //                 icon: Icon(Icons.save))),
+  //       ]);
+  // }
+
+
+
+// (tabWidgets.isNotEmpty)
+//                   ? ReorderableListView(
+//                       children: tabWidgets[indexTab].wrkts!.map((e) {
+//                         return GestureDetector(
+//                           key: Key(e.name),
+//                           onTap: () {
+//                             showModalBottomSheet(
+//                                 isScrollControlled: true,
+//                                 shape: RoundedRectangleBorder(
+//                                     borderRadius: BorderRadius.only(
+//                                         topLeft: Radius.circular(10),
+//                                         topRight: Radius.circular(10))),
+//                                 context: context,
+//                                 builder: (BuildContext context) {
+//                                   return bottomPopUp(
+//                                     size: size,
+//                                     dataSecond: e,
+//                                   );
+//                                 });
+//                           },
+//                           child: PlansCards(
+//                             titleFontSize: size.width * .04,
+//                             title: e.name,
+//                             size: size,
+//                             icon: IconButton(
+//                               icon: Icon(Icons.delete),
+//                               onPressed: () async {
+//                                 tabWidgets[indexTab].wrkts!.remove(e);
+//                                 setState(() {});
+//                               },
+//                             ),
+//                           ),
+//                         );
+//                       }).toList(),
+//                       onReorder: (int oldIndex, int newIndex) {
+//                         setState(() {
+//                           if (oldIndex < newIndex) {
+//                             newIndex -= 1;
+//                           }
+//                           final item =
+//                               tabWidgets[indexTab].wrkts!.removeAt(oldIndex);
+//                           tabWidgets[indexTab].wrkts!.insert(newIndex, item);
+//                         });
+//                       },
+//                     )
+//                   : Center(
+//                       child: Text('empty'),
+//                     )

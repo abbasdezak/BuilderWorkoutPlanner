@@ -5,6 +5,7 @@ import 'package:builderworkoutplanner/pages/home_page.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:builderworkoutplanner/pages/details_page.dart';
+import 'package:get/get.dart';
 import 'data.dart';
 import 'models/time_helper.dart';
 
@@ -34,14 +35,16 @@ class _MyAppState extends State<MyApp> {
 // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     SystemChrome.setPreferredOrientations([
-        DeviceOrientation.portraitUp,
-      ]);
-    return MaterialApp(
+      DeviceOrientation.portraitUp,
+    ]);
+    return GetMaterialApp(
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         brightness: Brightness.light,
         primaryColor: Colors.white,
-        fontFamily: 'Josefin Sans', colorScheme: ColorScheme.fromSwatch().copyWith(secondary: Color(firstColor)),
+        fontFamily: 'Josefin Sans',
+        colorScheme:
+            ColorScheme.fromSwatch().copyWith(secondary: Color(firstColor)),
       ),
       title: 'Auth page',
       home: Scaffold(body: SplashScreen()),
@@ -84,7 +87,6 @@ class _SplashScreenState extends State<SplashScreen> {
 
   @override
   void initState() {
-
     _loadChcekcer();
     super.initState();
   }
