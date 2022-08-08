@@ -33,7 +33,7 @@ dependencies:
   path_provider:
   build_runner:
   flare_flutter:
-  flutter_countdown_timer: ^4.1.0
+  flutter_countdown_timer: 
   table_calendar: 
   direct_select:
   
@@ -42,16 +42,18 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: 
-  localstorage: ^4.0.0+1
-  quiver: ^3.0.1+1
+  localstorage: 
+  quiver: 
   youtube_player_flutter:
     git:
       url: https://github.com/T-moz/youtube_player_flutter
       path: packages/youtube_player_flutter
   shared_preferences: 
-  animated_bottom_navigation_bar: ^1.0.1
-  cached_network_image: ^3.2.0
+  animated_bottom_navigation_bar: 
+  cached_network_image: 
   get: 
+  flutter_staggered_animations: ^1.0.0
+  syncfusion_flutter_charts: ^20.2.40
 
 
 dev_dependencies:
