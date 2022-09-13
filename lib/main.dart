@@ -1,18 +1,23 @@
 import 'dart:async';
-import 'dart:io';
 import 'dart:ui';
-import 'package:builderworkoutplanner/pages/home_page.dart';
+import 'package:builderworkoutplanner/app/core/model/time_helper.dart';
+import 'package:builderworkoutplanner/app/core/values/theme.dart';
+import 'package:builderworkoutplanner/app/data/local/preference/prefs.dart';
+import 'package:builderworkoutplanner/app/modules/introduction/controllers/intro_controller.dart';
+import 'package:builderworkoutplanner/app/modules/introduction/views/intro_view.dart';
+import 'package:builderworkoutplanner/app/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:builderworkoutplanner/pages/details_page.dart';
 import 'package:get/get.dart';
-import 'data.dart';
-import 'models/time_helper.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
-  WidgetsFlutterBinding
-      .ensureInitialized(); // <-- Adding this line to initialize my app first
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+  // <-- Adding this line to initialize my app first
+  SharedPreferences.getInstance().then((SharedPreferences sp) {
+    Prefs.setPrefs(sp);
+    runApp(MyApp());
+  });
 }
 
 class MyApp extends StatefulWidget {
@@ -27,11 +32,6 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    precacheImage(AssetImage("assets/images/details_image.jpg"), context);
-    precacheImage(AssetImage("assets/images/empty.jpg"), context);
-    precacheImage(AssetImage("assets/images/first_page.jpg"), context);
-    precacheImage(AssetImage("assets/images/height.jpg"), context);
-
 // SystemChrome.setEnabledSystemUIMode(SystemUiMode.edgeToEdge);
 
     SystemChrome.setPreferredOrientations([
@@ -39,13 +39,7 @@ class _MyAppState extends State<MyApp> {
     ]);
     return GetMaterialApp(
       debugShowCheckedModeBanner: false,
-      theme: ThemeData(
-        brightness: Brightness.light,
-        primaryColor: Colors.white,
-        fontFamily: 'Josefin Sans',
-        colorScheme:
-            ColorScheme.fromSwatch().copyWith(secondary: Color(firstColor)),
-      ),
+      theme: lightTheme,
       title: 'Auth page',
       home: Scaffold(body: SplashScreen()),
     );
@@ -64,23 +58,20 @@ class SplashScreen extends StatefulWidget {
 class _SplashScreenState extends State<SplashScreen> {
   Timer? _timer;
   Map data = {};
-  bool _isLoaded = false;
+  IntroController introController = Get.put(IntroController());
 
   _loadChcekcer() async {
-    data = await TimeHelper.dataGetter('Settings', 'Setting');
-
     _timer = Timer(const Duration(seconds: 2), () {
-      setState(() {
-        _isLoaded = true;
-      });
-      if (data.isNotEmpty) {
-        Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (BuildContext context) => HomePage()));
+      if (introController.isInitiated.value == true) {
+        Get.to(
+            HomePage(
+              currIndex: 1,
+            ),
+            transition: Transition.cupertino,
+            duration: Duration(seconds: 3));
       } else {
-        Navigator.pushReplacement(
-            context,
-            MaterialPageRoute(
-                builder: (BuildContext context) => DetailsPage()));
+        Get.to(IntroView(),
+            transition: Transition.cupertino, duration: Duration(seconds: 2));
       }
     });
   }
@@ -94,10 +85,6 @@ class _SplashScreenState extends State<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
-    return splashScren(size);
-  }
-
-  Stack splashScren(Size size) {
     return Stack(
       children: [
         Container(
