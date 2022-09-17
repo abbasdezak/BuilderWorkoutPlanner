@@ -1,4 +1,5 @@
 import 'package:builderworkoutplanner/app/core/base/core_controller.dart';
+import 'package:builderworkoutplanner/app/core/model/exercise_model.dart';
 import 'package:builderworkoutplanner/app/core/values/app_colors.dart';
 import 'package:builderworkoutplanner/app/core/values/theme.dart';
 import 'package:builderworkoutplanner/app/core/widget/listview_card.dart';
@@ -6,6 +7,7 @@ import 'package:builderworkoutplanner/app/core/widget/rounded_text_field.dart';
 import 'package:builderworkoutplanner/app/modules/introduction/model/info_model.dart';
 import 'package:builderworkoutplanner/app/modules/settings/controllers/settings_controller.dart';
 import 'package:builderworkoutplanner/app/modules/statics/controllers/stats_controller.dart';
+import 'package:builderworkoutplanner/app/modules/workout_page/views/workout.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
@@ -94,29 +96,32 @@ class SettingsPage extends StatelessWidget {
                       style: bigTitleStyle,
                     ),
                   ),
-                  _settingsController.historyLists.value.events !=null?
-                  Column(
-                      children: List.generate(
-                    _settingsController.historyLists.value.events!.length,
-                    (index) => Container(
-                      padding: EdgeInsets.only(left: 10, right: 15, bottom: 15),
-                      child: PlansCards(
-                        title: '${_settingsController.historyLists.value.events![index].id}'.toUpperCase(),
-                        titleFontSize: titleStyle,
-                        subTitle: '${_settingsController.historyLists.value.events![index].dateTime}',
-                        // image: Image(
-                        //   image: AssetImage("assets/icons/sets_workout.png"),
-                        //   height: 35,
-                        //   width: 35,
-                        // )
-                        icon: Icon(
-                          Icons.play_circle_fill_rounded,
-                          size: 30,
-                          color: Colors.blue[900],
-                        ),
-                      ),
-                    ),
-                  )):Container(),
+                  _settingsController.historyLists.value != null
+                      ? Column(
+                          children: List.generate(
+                          _settingsController.historyLists.value!.length,
+                          (index) => Container(
+                            padding: EdgeInsets.only(
+                                left: 10, right: 15, bottom: 15),
+                            child: PlansCards(
+                              title:
+                                  '${AllPlans().nameEncoder(_settingsController.historyLists.value![index].id.toString())}'
+                                      .toUpperCase(),
+                              titleFontSize: titleStyle,
+                              subTitle:
+                                  'Repetition : ${_settingsController.historyLists.value![index].dateTime!.length} times\nLast Time : ${_settingsController.historyLists.value![index].dateTime!.last} ',
+                              onTap: () => Get.to(Workout(
+                                  workoutName: _settingsController
+                                      .historyLists.value![index].id!)),
+                              icon: Icon(
+                                Icons.history,
+                                size: 30,
+                                color: Colors.blue[900],
+                              ),
+                            ),
+                          ),
+                        ))
+                      : Container(),
                 ],
               ),
             ),

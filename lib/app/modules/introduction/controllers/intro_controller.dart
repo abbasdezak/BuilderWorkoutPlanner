@@ -27,7 +27,7 @@ class IntroController extends GetxController {
     super.onClose();
   }
 
-  savePersonalInformations() {
-    Prefs().savePersonalInformations(infos.value);
+  savePersonalInformations() async {
+    await Prefs().savePersonalInformations(infos.value);
   }
 }

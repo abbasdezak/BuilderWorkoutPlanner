@@ -18,7 +18,7 @@ class AddExercise extends StatefulWidget {
 
 class _AddExerciseState extends State<AddExercise> {
   var is_loaded = false;
-  final _exercoseController = Get.put(AddNew());
+  final _exercoseController = Get.put(AddNewController());
 
   @override
   initState() {
@@ -83,7 +83,7 @@ class _AddExerciseState extends State<AddExercise> {
 
   Container _searchBar(Size size) {
     return Container(
-      height: size.height * .2,
+      height: size.height * .22,
       width: size.width,
       margin: EdgeInsets.only(top: size.height * .02, left: 20),
       child: Column(

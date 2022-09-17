@@ -4,7 +4,7 @@ import 'package:builderworkoutplanner/app/data/local/db/db_helper.dart';
 import 'package:builderworkoutplanner/app/data/local/preference/prefs.dart';
 import 'package:get/get.dart';
 
-class AddNew extends CoreController {
+class AddNewController extends CoreController {
   @override
   void onReady() {
     // TODO: implement onReady
@@ -23,8 +23,8 @@ class AddNew extends CoreController {
     super.onClose();
   }
 
-  savePlan({required plan, required planName}) async {
-    await Prefs().saveData(plan: plan, name: planName);
+  savePlan({required List<Company> plan, required planName}) async {
+    await Prefs().saveData(plan: plan, name: '${planName}%${plan[0].imgurl}${plan[0].id}');
   }
 
   void duplicate() {

@@ -2,16 +2,19 @@ import 'dart:async';
 
 import 'package:builderworkoutplanner/app/core/base/core_controller.dart';
 import 'package:builderworkoutplanner/app/core/model/time_helper.dart';
+import 'package:builderworkoutplanner/app/core/values/theme.dart';
 import 'package:builderworkoutplanner/app/modules/workout_page/controllers/workout_controller.dart';
 import 'package:builderworkoutplanner/app/my_app.dart';
 import 'package:flare_flutter/flare_actor.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/model/exercise_model.dart';
+
 class RestPage extends StatefulWidget {
-  final int workoutIndex;
+  final String workoutName;
   RestPage({
-    Key? key, required this.workoutIndex,
+    Key? key, required this.workoutName,
   }) : super(key: key);
 
   @override
@@ -21,6 +24,7 @@ class RestPage extends StatefulWidget {
 class _RestPageState extends State<RestPage> with WidgetsBindingObserver {
   WorkoutController _state = Get.put(WorkoutController());
   CoreController _controller = Get.put(CoreController());
+  Plan? plan;
   
   FlareActor _flareActor = FlareActor(
     'assets/circle.flr',
@@ -63,7 +67,10 @@ class _RestPageState extends State<RestPage> with WidgetsBindingObserver {
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
     return Scaffold(body: Obx(() {
-      var nextName = _controller.plans[widget.workoutIndex]
+      plan = _controller.plans.value
+            .firstWhere((element) => element.planName == widget.workoutName);
+     
+      var nextName = plan!
               .exercises![_state.currIndex.toInt()].name
               .toString(),
           _currIndex = _state.currIndex.toInt() + 1;
@@ -103,17 +110,16 @@ class _RestPageState extends State<RestPage> with WidgetsBindingObserver {
                 width: size.width * .8,
                 child: Stack(
                   children: [
-                    Positioned(
+                    Container(
+                      width: size.width*.6,
                       child: Text('Next : ${nextName}',
-                          style: TextStyle(
-                              fontSize: size.height * .03,
-                              fontWeight: FontWeight.bold)),
+                          style: subTitleStyleGrey),
                     ),
                     Positioned(
                       right: 0,
                       child: Text('${_currIndex}/${totalIndex}',
                           style: TextStyle(
-                              fontSize: size.height * .038,
+                              fontSize: size.height * .024,
                               fontWeight: FontWeight.bold)),
                     ),
                   ],

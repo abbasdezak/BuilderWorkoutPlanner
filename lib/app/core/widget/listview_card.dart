@@ -32,7 +32,7 @@ class _PlansCardsState extends State<PlansCards> {
       onTap: widget.onTap,
       child: Container(
         width: double.infinity,
-        height: size!.height * .13,
+        height: size.height * .13,
         decoration: BoxDecoration(
             color: Colors.white,
             borderRadius: BorderRadius.circular(15),
@@ -61,7 +61,7 @@ class _PlansCardsState extends State<PlansCards> {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Container(
-                    width: size!.width * .45,
+                    width: size.width * .45,
                     child: Text((widget.title) != null ? "${widget.title}" : '',
                         style: widget.titleFontSize),
                   ),

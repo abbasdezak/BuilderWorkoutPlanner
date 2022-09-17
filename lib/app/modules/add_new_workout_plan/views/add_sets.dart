@@ -9,61 +9,21 @@ import 'package:builderworkoutplanner/app/my_app.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
-class AddSets extends StatefulWidget {
-  final tableName;
-  const AddSets({Key? key, this.tableName}) : super(key: key);
+ 
 
-  @override
-  _AddSetsState createState() => _AddSetsState();
-}
-
-class _AddSetsState extends State<AddSets> {
+class AddSets extends StatelessWidget {
   TextEditingController _workoutName = new TextEditingController();
-  AddNew _exerciseController = Get.put(AddNew());
+  AddNewController _exerciseController = Get.put(AddNewController());
 
-  @override
-  void initState() {
-    super.initState();
-  }
-
+  
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
 
-    Future<bool> _onWillPop() async {
-      return (await showDialog(
-            builder: (context) => AlertDialog(
-              title: Text(
-                'Are you sure?',
-                style: TextStyle(fontWeight: FontWeight.bold),
-              ),
-              content: Text(
-                'Want to return back?\nAll data will be lost!',
-                style: TextStyle(fontSize: size.width * .045),
-              ),
-              actions: <Widget>[
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(false),
-                  child: Text('No'),
-                ),
-                TextButton(
-                  onPressed: () => Navigator.of(context).pop(true),
-                  child: Text('Yes'),
-                ),
-              ],
-            ),
-            context: context,
-          )) ??
-          false;
-    }
-
-    return WillPopScope(
-      onWillPop: _onWillPop,
-      child: Scaffold(
-        backgroundColor: AppColors.darkBlue,
-        appBar: _appBar(context),
-        body: widgets(context, size),
-      ),
+    return Scaffold(
+      backgroundColor: AppColors.darkBlue,
+      appBar: _appBar(context),
+      body: widgets(context, size),
     );
   }
 
@@ -117,9 +77,9 @@ class _AddSetsState extends State<AddSets> {
                     plan: _exerciseController.selectedExercises,
                     planName: _workoutName.text);
                 Get.to(HomePage(
-                  currIndex: 0,
+                  currIndex: 1,
                 ));
-
+                _workoutName.dispose();
                 _exerciseController.dispose();
               }
             },
@@ -142,14 +102,14 @@ class _AddSetsState extends State<AddSets> {
 
   widgets(BuildContext context, Size size) {
     return Obx(() {
-      bool showSettings = !_exerciseController.selectedExercises
-          .every((element) => element.isSelected == false);
+      bool showSettings = _exerciseController.selectedExercises
+          .any((element) => element.isSelected == true);
       print(showSettings);
       return Stack(children: [
         Column(
           children: [
             Container(
-              height: size.height * .18,
+              height: size.height * .19,
               width: size.width,
               margin: EdgeInsets.only(top: size.height * .02, left: 20),
               child: Column(

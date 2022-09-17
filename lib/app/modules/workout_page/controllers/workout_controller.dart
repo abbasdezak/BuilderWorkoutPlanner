@@ -3,12 +3,14 @@ import 'package:builderworkoutplanner/app/core/base/core_controller.dart';
 import 'package:builderworkoutplanner/app/core/model/events.dart';
 import 'package:builderworkoutplanner/app/core/model/exercise_model.dart';
 import 'package:builderworkoutplanner/app/data/local/preference/prefs.dart';
+import 'package:builderworkoutplanner/app/modules/statics/controllers/stats_controller.dart';
 import 'package:get/get.dart';
 
 enum PageState { workout, rest, ending }
 
 class WorkoutController extends GetxController {
   CoreController _controller = Get.put(CoreController());
+  StatsController _statsController = Get.put(StatsController());
   var pageStatus = PageState.workout.obs;
   var currIndex = 0.obs;
   var totalIndex = 0.obs;
@@ -18,7 +20,8 @@ class WorkoutController extends GetxController {
   Timer? timer;
   @override
   void onInit() {
-    super.onInit();}
+    super.onInit();
+  }
 
   void reset() {
     seconds(maxSeconds);
@@ -44,16 +47,16 @@ class WorkoutController extends GetxController {
     });
   }
 
-  void saveWorkoutDetails({required Plan details}) {
-    var id = Events().idGenerator(details);
+  void saveWorkoutDetails({required Plan details}) async {
     int weight = 0;
     details.exercises!.forEach((e) {
       e.sets!.forEach((element) {
         weight += int.parse(element.weight!);
       });
     });
-    Prefs()
-        .saveWorkoutDetails(dateTime: DateTime.now(), id: id, weight: weight);
-    _controller.getAllcharts();
+    await Prefs().saveWorkoutDetails(
+        dateTime: DateTime.now(), id: details.planName, weight: weight);
+  await _controller.getAllcharts();
+   await _statsController.initData();
   }
 }

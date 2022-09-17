@@ -12,14 +12,8 @@ class CoreController extends GetxController {
   @override
   void onInit() {
     super.onInit();
-     getAllcharts();
+    getAllcharts();
   }
-
-  // @override
-  // void onClose() {
-  //   // plans.close();
-  //   super.onClose();
-  // }
 
   List<ChartSampleData> statiisticsChart() {
     List<DateTime> listTime = [];
@@ -36,13 +30,11 @@ class CoreController extends GetxController {
     }
   }
 
-  List<ChartSampleData> showCharts(details) {
+  List<ChartSampleData> showCharts(name) {
     try {
-      print('${chartSamples[1].exercisesRepetations}');
       return TimeHelper().workoutChaetSamlpes(
           dates: chartSamples
-              .firstWhere(
-                  (element) => element.id == Events().idGenerator(details))
+              .firstWhere((element) => element.id == name)
               .dateTime as List<DateTime>);
     } catch (e) {
       // print(e);
@@ -50,7 +42,7 @@ class CoreController extends GetxController {
     }
   }
 
-  void getAllcharts() async {
+  getAllcharts() async {
     try {
       var getPlans = await Prefs().getData();
       plans.assignAll(getPlans.plans!.map((e) => e));

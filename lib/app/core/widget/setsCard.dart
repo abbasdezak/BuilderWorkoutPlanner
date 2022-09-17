@@ -143,51 +143,50 @@ class SetCard extends StatelessWidget {
             'SET $index',
             style: smalSubTitleStyle,
           ),
-          Container(
-            height: 60,
-            width: 30,
-            child: Column(
-              children: [
-                TextFormField(
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: size.height * .032),
+                height: size.height * .1,
+                width: size.width * .1,
+                child: TextFormField(
+                  
+                    textAlign: TextAlign.center,
                     controller: repController,
                     maxLength: 3,
+
                     keyboardType: TextInputType.number,
-                    autofocus: false,
                     style: titleStyle,
-                    onSaved: (value) => print(value),
                     decoration: InputDecoration.collapsed(
-                        hintStyle: titleStyle, hintText: '')),
-                Text(
-                  'Reps',
-                  style: smalSubTitleStyle,
-                )
-              ],
-            ),
+                        hintText: '12')),
+              ),
+              Text(
+                'Reps',
+                style: smalSubTitleStyle,
+              ),
+            ],
           ),
-          Text(
-            '*',
-            style: subTitleStyle,
-          ),
-          Container(
-            height: 60,
-            width: 30,
-            child: Column(
-              children: [
-                TextFormField(
+          Row(
+            children: [
+              Container(
+                padding: EdgeInsets.only(top: size.height * .032),
+                height: size.height * .1,
+                width: size.width * .1,
+                child: TextFormField(
+                    textAlign: TextAlign.center,
                     controller: weightController,
                     maxLength: 3,
                     keyboardType: TextInputType.number,
                     autofocus: false,
                     style: titleStyle,
-                    onSaved: (value) => print(value),
                     decoration: InputDecoration.collapsed(
-                        hintStyle: titleStyle, hintText: '')),
-                Text(
-                  "Kg",
-                  style: smalSubTitleStyle,
-                )
-              ],
-            ),
+                         hintText: '30')),
+              ),
+              Text(
+                'Kg',
+                style: smalSubTitleStyle,
+              ),
+            ],
           )
         ],
       ),

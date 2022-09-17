@@ -32,9 +32,7 @@ class Events {
 
   factory Events.fromJson(String source) => Events.fromMap(json.decode(source));
 
-  idGenerator(details) {
-    return '${details.planName}${details.exercises?[0].id}${details.exercises?[0].id}';
-  }
+ 
 }
 
 class Event {

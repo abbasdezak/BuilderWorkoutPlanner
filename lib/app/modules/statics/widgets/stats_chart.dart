@@ -1,13 +1,17 @@
 import 'package:builderworkoutplanner/app/modules/home/model/chart_sample_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
+import '../controllers/stats_controller.dart';
+
 class StatsChart extends StatelessWidget {
-  StatsChart({required this.chartData});
-  List<ChartSampleData> chartData;
+  StatsChart();
+  StatsController _stats = Get.put(StatsController());
+
   double findMax() {
     var x = 0;
-    chartData.forEach((element) {
+    _stats.workoutDates.forEach((element) {
       if (element.y > x) {
         x = element.y;
       }
@@ -34,32 +38,35 @@ class StatsChart extends StatelessWidget {
 
   @override
   Widget buildSettings(BuildContext context) {
-    return Row(
-      children: <Widget>[
-        Text('Spline type ',
-            style: TextStyle(
-              color: Colors.black,
-              fontSize: 16,
-            )),
-        Container(
-          padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
-          height: 50,
-          alignment: Alignment.bottomLeft,
-          child: DropdownButton<String>(
-              focusColor: Colors.transparent,
-              underline: Container(color: const Color(0xFFBDBDBD), height: 1),
-              value: _selectedSplineType,
-              items: _splineList!.map((String value) {
-                return DropdownMenuItem<String>(
-                    value: (value != null) ? value : 'natural',
-                    child: Text(value, style: TextStyle(color: Colors.black)));
-              }).toList(),
-              onChanged: (dynamic value) {
-                _onPositionTypeChange(value.toString());
-                // stateSetter(() {});
-              }),
-        ),
-      ],
+    return Obx(
+      () => Row(
+        children: <Widget>[
+          Text('Spline type ',
+              style: TextStyle(
+                color: Colors.black,
+                fontSize: 16,
+              )),
+          Container(
+            padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+            height: 50,
+            alignment: Alignment.bottomLeft,
+            child: DropdownButton<String>(
+                focusColor: Colors.transparent,
+                underline: Container(color: const Color(0xFFBDBDBD), height: 1),
+                value: _selectedSplineType,
+                items: _splineList!.map((String value) {
+                  return DropdownMenuItem<String>(
+                      value: (value != null) ? value : 'natural',
+                      child:
+                          Text(value, style: TextStyle(color: Colors.black)));
+                }).toList(),
+                onChanged: (dynamic value) {
+                  _onPositionTypeChange(value.toString());
+                  // stateSetter(() {});
+                }),
+          ),
+        ],
+      ),
     );
   }
 
@@ -100,7 +107,7 @@ class StatsChart extends StatelessWidget {
 
           /// To set the spline type here.
           splineType: _spline,
-          dataSource: chartData,
+          dataSource: _stats.workoutDates,
           xValueMapper: (ChartSampleData sales, _) => sales.x,
           yValueMapper: (ChartSampleData sales, _) => sales.y,
           width: 2)

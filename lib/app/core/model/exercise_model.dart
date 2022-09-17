@@ -21,6 +21,10 @@ class AllPlans {
     }
     return data;
   }
+
+  String nameEncoder(String name) {
+    return name.split('%')[0];
+  }
 }
 
 class Plan {
@@ -104,9 +108,8 @@ class SetDetails {
 
   Map<String, dynamic> toJson() => {
         "SET": this.setNumber,
-        "REPS": this.repsController != null
-            ? this.repsController!.text
-            : this.reps,
+        "REPS":
+            this.repsController != null ? this.repsController!.text : this.reps,
         "WEIGHT": this.weightController != null
             ? this.weightController!.text
             : this.weight,

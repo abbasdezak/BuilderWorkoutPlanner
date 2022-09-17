@@ -6,12 +6,15 @@ import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
+import '../../../core/model/exercise_model.dart';
+
 class WorkoutPage extends StatelessWidget {
   CoreController _controller = Get.put(CoreController());
   WorkoutController _state = Get.put(WorkoutController());
-  final int workoutIndex;
+  final String workoutName;
   WorkoutPage({
-    Key? key, required this.workoutIndex,
+    Key? key,
+    required this.workoutName,
   }) : super(key: key);
 
   @override
@@ -23,12 +26,12 @@ class WorkoutPage extends StatelessWidget {
 
   widgets(Size size, BuildContext context) {
     return Obx(() {
+      Plan plan = _controller.plans.value
+          .firstWhere((element) => element.planName == workoutName);
       if (_state.totalIndex == 0) {
-        _state.totalIndex(
-            _controller.plans[workoutIndex].exercises!.length);
+        _state.totalIndex(plan.exercises!.length);
       }
-      var workoutContents =
-          _controller.plans[workoutIndex].exercises;
+      var workoutContents = plan.exercises;
       int currentExercise = _state.currIndex.toInt();
       var linearValue = (currentExercise + 1) / workoutContents!.length;
       bool checkSetLenght = workoutContents[currentExercise].sets!.length >= 2;
@@ -77,13 +80,12 @@ class WorkoutPage extends StatelessWidget {
                     width: size.width * .6,
                     child: Text('${workoutContents[currentExercise].name}',
                         style: TextStyle(
-                            fontSize: size.height * .025,
-                            fontWeight: FontWeight.bold)),
+                          fontSize: size.height * .02,
+                        ),),
                   ),
                   Text('${currentExercise + 1}/${workoutContents.length}',
                       style: TextStyle(
-                          fontSize: size.height * .038,
-                          fontWeight: FontWeight.bold)),
+                          fontSize: size.height * .028,)),
                 ],
               ),
               Container(

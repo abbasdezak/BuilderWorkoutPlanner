@@ -9,25 +9,26 @@ import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 
 class Workout extends StatelessWidget {
-  Workout({Key? key, required this.workoutIndex}) : super(key: key);
+  Workout({Key? key, required this.workoutName}) : super(key: key);
   CoreController _controller = Get.put(CoreController());
-  final int workoutIndex;
+  final String workoutName;
+
   @override
   Widget build(BuildContext context) {
     return GetX<WorkoutController>(
-        init: WorkoutController(),
+        init: WorkoutController(), 
         builder: (state) {
           if (state.pageStatus == PageState.workout) {
             return WorkoutPage(
-              workoutIndex: workoutIndex,
+              workoutName: workoutName,
             );
           } else if (state.currIndex < state.totalIndex.toInt()) {
             return RestPage(
-              workoutIndex: workoutIndex,
+              workoutName: workoutName,
             );
           } else {
             return CongratPage(
-              workoutIndex: workoutIndex,
+              workoutName: workoutName,
             );
           }
         });

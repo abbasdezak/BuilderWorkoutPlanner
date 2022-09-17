@@ -1,5 +1,6 @@
 import 'package:builderworkoutplanner/app/core/base/core_controller.dart';
 import 'package:builderworkoutplanner/app/core/model/events.dart';
+import 'package:builderworkoutplanner/app/core/model/exercise_model.dart';
 import 'package:builderworkoutplanner/app/core/model/time_helper.dart';
 import 'package:builderworkoutplanner/app/core/values/app_colors.dart';
 import 'package:builderworkoutplanner/app/core/values/theme.dart';
@@ -35,11 +36,15 @@ class ShowAll extends StatelessWidget {
                   return Container(
                       margin: EdgeInsets.symmetric(horizontal: 10, vertical: 5),
                       child: HomeChart(
-                        chartsData: _controller.showCharts(_controller.plans[index]),
+                        chartsData: _controller
+                            .showCharts(_controller.plans[index].planName),
                         onStart: () {
-                          Get.to(Workout(workoutIndex: index,));
+                          Get.to(Workout(
+                            workoutName: _controller.plans[index].planName!,
+                          ));
                         },
-                        title: '${_controller.plans[index].planName}',
+                        title:
+                            '${AllPlans().nameEncoder(_controller.plans[index].planName!)}',
                       ));
                 });
           }))

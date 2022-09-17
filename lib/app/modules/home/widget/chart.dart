@@ -3,7 +3,6 @@ import 'package:builderworkoutplanner/app/core/values/theme.dart';
 import 'package:builderworkoutplanner/app/modules/home/model/chart_sample_data.dart';
 import 'package:builderworkoutplanner/app/modules/home/widget/blue_botton.dart';
 import 'package:flutter/material.dart';
-import 'package:get/get.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 
 class WorkoutPrevChart extends StatelessWidget {
@@ -16,6 +15,8 @@ class WorkoutPrevChart extends StatelessWidget {
       canShowMarker: false,
       format: 'point.x : point.y times',
       header: '');
+
+ 
   @override
   Widget build(BuildContext context) {
     var size = MediaQuery.of(context).size;
@@ -62,12 +63,12 @@ class WorkoutPrevChart extends StatelessWidget {
 }
 
 class HomeChart extends StatelessWidget {
-  HomeChart(
-      {Key? key,
-      required this.title,
-      required this.onStart,
-      required this.chartsData})
-      : super(key: key);
+  HomeChart({
+    Key? key,
+    required this.title,
+    required this.onStart,
+    required this.chartsData,
+  }) : super(key: key);
   final String title;
   final List<ChartSampleData> chartsData;
   final Function() onStart;
@@ -81,11 +82,17 @@ class HomeChart extends StatelessWidget {
     var x = 0;
     chartsData.forEach((element) {
       if (element.y > x) {
-         x = element.y;
+        x = element.y;
       }
     });
     print(x);
     return x.toDouble();
+  }
+
+  int findTimesCompleted() {
+    int x = 0;
+    chartsData.forEach((element) => x += element.y);
+    return x;
   }
 
   @override
@@ -138,11 +145,11 @@ class HomeChart extends StatelessWidget {
             Column(
               children: [
                 Text(
-                  '7',
+                  '${findTimesCompleted()}',
                   style: titleStyleWhite,
                 ),
                 Text(
-                  'times Completed',
+                  'Times Completed',
                   style: subTitleStyle,
                 ),
               ],
