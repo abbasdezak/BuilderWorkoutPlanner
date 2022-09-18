@@ -1,13 +1,11 @@
 import 'package:builderworkoutplanner/app/core/model/events.dart';
 import 'package:builderworkoutplanner/app/my_app.dart';
 import 'package:flutter/material.dart';
-import 'package:localstorage/localstorage.dart';
 
 import '../../../core/model/exercise_model.dart';
 
 class CongratPage extends StatelessWidget {
 
-  final LocalStorage localStorage = new LocalStorage('dates');
 
   Map<DateTime, List<Event>> selectedEvents = {};
   int? weeksCount;
@@ -16,27 +14,6 @@ class CongratPage extends StatelessWidget {
 
   CongratPage({Key? key, required this.workoutName}) : super(key: key);
 
-  // setUp() async {
-  //   await localStorage.ready;
-  //   if (localStorage.getItem('date') != null) {
-  //     Map userMap = localStorage.getItem('date');
-
-  //     List dates = userMap['workedout'];
-  //     // print('these are dates $dates');
-
-  //     setState(() {
-  //       dates.forEach((element) {
-  //         var now = DateTime.parse(element);
-  //         var createTime = '${DateTime(now.year, now.month, now.day)}Z';
-  //         selectedEvents[DateTime.parse(createTime)] = [Event(id: 'event')];
-  //       });
-  //     });
-  //     weeksCount =
-  //         TimeHelper.workoutsCounter(selectedEvents.keys.toList())['Week'];
-
-  //     print(selectedEvents.keys.toList());
-  //   }
-  // }
 
   @override
   Widget build(BuildContext context) {

@@ -25,14 +25,13 @@ class SettingsController extends GetxController {
   }
 
   loadData() async {
+    var personalData = await Prefs().getPersonalInfo();
+    infos(personalData);
     var historyData = await Prefs().getWorkoutDetails();
     historyData.events!.sort(
       (a, b) => b.exercisesRepetations!.compareTo(a.exercisesRepetations!),
     );
     historyLists(historyData.events);
-
-    var personalData = await Prefs().getPersonalInfo();
-    infos(personalData);
   }
 
   editPersonalInfo(InfoModel info) async {

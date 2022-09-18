@@ -53,7 +53,7 @@ class _PlansCardsState extends State<PlansCards> {
                     child: widget.image!)
                 : Center(),
             SizedBox(
-              width: size!.width * .05,
+              width: size.width * .05,
             ),
             Expanded(
               child: Column(

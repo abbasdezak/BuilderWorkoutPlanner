@@ -1,4 +1,5 @@
 import 'package:builderworkoutplanner/app/core/values/theme.dart';
+import 'package:builderworkoutplanner/app/data/local/preference/prefs.dart';
 import 'package:builderworkoutplanner/app/modules/introduction/controllers/intro_controller.dart';
 import 'package:builderworkoutplanner/app/my_app.dart';
 import 'package:builderworkoutplanner/main.dart';
@@ -62,8 +63,8 @@ class HeightView extends StatelessWidget {
                   ),
                 ),
                 GestureDetector(
-                  onTap: () {
-                    introController.savePersonalInformations();
+                  onTap: () async {
+                     introController.savePersonalInformations();
                     Get.to(
                       HomePage(
                         currIndex: 1,

@@ -22,19 +22,13 @@ class StatsController extends GetxController {
 
   initData() async {
     print('init Data Called');
-    var dummyfordetails = await Prefs().getWorkoutDetails();
+
     var dummyforbmi = await Prefs().getPersonalInfo();
+    var dummyfordetails = await Prefs().getWorkoutDetails();
 
     List<DateTime> dummyfordates = [];
     int dummyforweight = 0;
     Map<DateTime, List<Event>> dummyforselectedevents = {};
-
-    dummyfordetails.events!.forEach((e) {
-      dummyforweight += (e.exercisesWeight! * e.exercisesRepetations!);
-      e.dateTime!.forEach((element) {
-        dummyfordates.add(element);
-      });
-    });
 
     dummyfordates.forEach((element) {
       var now = DateTime.parse(element.toString());
@@ -47,13 +41,20 @@ class StatsController extends GetxController {
 
     bmi(weight / (height * height));
 
+    weightKg(int.parse(dummyforbmi.weight!));
+
+    dummyfordetails.events!.forEach((e) {
+      dummyforweight += (e.exercisesWeight! * e.exercisesRepetations!);
+      e.dateTime!.forEach((element) {
+        dummyfordates.add(element);
+      });
+    });
+
     tonnageLifted(dummyforweight);
 
     workoutCompleted(dummyfordates.length);
 
     workoutDates(TimeHelper().statsChartSamples(dates: dummyfordates));
-
-    weightKg(int.parse(dummyforbmi.weight!));
 
     selectedEvents(dummyforselectedevents);
 

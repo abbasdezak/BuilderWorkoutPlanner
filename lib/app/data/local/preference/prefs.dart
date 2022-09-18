@@ -31,18 +31,19 @@ class Prefs {
   }
 
   savePersonalInformations(InfoModel info) async {
+    var x = info.toJson();
     try {
-      var json = info.toJson();
-      await prefs!.setString('personalInfo', json);
+      print('infos are $x');
+      await prefs?.setString('personalInfo', x);
     } catch (e) {
-      print(e);
+      print('error is $e');
     }
   }
 
   Future<InfoModel> getPersonalInfo() async {
     try {
-      var json = await prefs!.getString('personalInfo');
-      InfoModel data = InfoModel.fromJson(json!);
+      var jsonX = await prefs!.getString('personalInfo');
+      InfoModel data = InfoModel.fromJson(jsonX!);
       return data;
     } catch (e) {
       throw Exception(e);

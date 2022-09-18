@@ -2,9 +2,6 @@ import 'package:builderworkoutplanner/app/core/values/theme.dart';
 import 'package:builderworkoutplanner/app/modules/introduction/controllers/intro_controller.dart';
 import 'package:builderworkoutplanner/app/modules/introduction/model/info_model.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
 import 'package:get/get.dart';
 import 'package:numberpicker/numberpicker.dart';
 

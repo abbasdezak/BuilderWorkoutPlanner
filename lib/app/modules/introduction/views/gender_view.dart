@@ -38,7 +38,7 @@ class GenderView extends StatelessWidget {
             textAlign: TextAlign.center,
           ),
           SizedBox(
-            height: size.height * .12,
+            height: size.height * .14,
           ),
           _squareButton(size),
           Spacer(),
@@ -108,7 +108,7 @@ class GenderView extends StatelessWidget {
               child: AnimatedContainer(
                 margin: EdgeInsets.all(15),
                 width: size.width * .27,
-                height: size.height * .17,
+                height: size.height * .15,
                 decoration: BoxDecoration(
                     color: introController.color1.value,
                     borderRadius: BorderRadius.circular(5),
@@ -148,7 +148,7 @@ class GenderView extends StatelessWidget {
               child: AnimatedContainer(
                 margin: EdgeInsets.all(15),
                 width: size.width * .27,
-                height: size.height * .17,
+                height: size.height * .15,
                 curve: Curves.fastOutSlowIn,
                 decoration: BoxDecoration(
                     color: introController.color2.value,

@@ -28,6 +28,6 @@ class IntroController extends GetxController {
   }
 
   savePersonalInformations() async {
-    await Prefs().savePersonalInformations(infos.value);
+     Prefs().savePersonalInformations(infos.value);
   }
 }
