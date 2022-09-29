@@ -88,7 +88,7 @@ class HomeView extends StatelessWidget {
               child: Column(
                 children: [
                   Text(
-                    '${_statsController.lastWorkout.value.dateTime!.last.day}',
+                    '${_statsController.lastWorkout.value.dateTime?.last.day}',
                     style: titleStyleWhite,
                   ),
                   Text(
@@ -186,7 +186,9 @@ class HomeView extends StatelessWidget {
             ))
           : Column(
               children: [
-                _prevWorkout(size),
+                (_statsController.lastWorkout.value.dateTime != null)
+                    ? _prevWorkout(size)
+                    : Container(),
                 Container(
                   padding: EdgeInsets.symmetric(
                       horizontal: size.width * .06,

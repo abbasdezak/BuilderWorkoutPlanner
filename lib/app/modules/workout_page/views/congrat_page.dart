@@ -1,19 +1,18 @@
 import 'package:builderworkoutplanner/app/core/model/events.dart';
+import 'package:builderworkoutplanner/app/core/model/exercise_model.dart';
+import 'package:builderworkoutplanner/app/modules/workout_page/controllers/workout_controller.dart';
 import 'package:builderworkoutplanner/app/my_app.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
-import '../../../core/model/exercise_model.dart';
+import '../../../core/base/core_controller.dart';
 
 class CongratPage extends StatelessWidget {
-
-
-  Map<DateTime, List<Event>> selectedEvents = {};
-  int? weeksCount;
   final String workoutName;
-  Plan? plan;
+  WorkoutController _workoutController = Get.put(WorkoutController());
+  CoreController _controller = Get.put(CoreController());
 
   CongratPage({Key? key, required this.workoutName}) : super(key: key);
-
 
   @override
   Widget build(BuildContext context) {
@@ -67,13 +66,16 @@ class CongratPage extends StatelessWidget {
                     backgroundColor: MaterialStateProperty.all<Color>(
                         Color(Colors.blue[100]!.value.toInt()))),
                 child: Text(
-                  'Se stats',
+                  'See stats',
                   style: TextStyle(
                       color: Colors.blue,
                       fontSize: size.height * .025,
                       fontWeight: FontWeight.bold),
                 ),
                 onPressed: () {
+                  Plan plan = _controller.plans.value
+                      .firstWhere((element) => element.planName == workoutName);
+                  _workoutController.saveWorkoutDetails(details: plan);
                   Navigator.pushReplacement(
                       context,
                       MaterialPageRoute(
