@@ -26,6 +26,8 @@ class StatsController extends GetxController {
     var dummyforbmi = await Prefs().getPersonalInfo();
     var dummyfordetails = await Prefs().getWorkoutDetails();
 
+    print('dummy for details : \n ${dummyfordetails.toJson()}');
+
     List<DateTime> dummyfordates = [];
     int dummyforweight = 0;
     Map<DateTime, List<Event>> dummyforselectedevents = {};

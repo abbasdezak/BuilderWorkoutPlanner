@@ -56,7 +56,7 @@ class WorkoutController extends GetxController {
     });
     await Prefs().saveWorkoutDetails(
         dateTime: DateTime.now(), id: details.planName, weight: weight);
-  await _controller.getAllcharts();
-   await _statsController.initData();
+   _controller.getAllcharts();
+  _statsController.initData();
   }
 }
