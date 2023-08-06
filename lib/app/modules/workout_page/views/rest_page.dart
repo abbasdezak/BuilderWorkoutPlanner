@@ -213,19 +213,4 @@ class _RestPageState extends State<RestPage> with WidgetsBindingObserver {
 }
 
 
-// CountdownTimer(
-//                               endTime: endTime,
-//                               controller: _timerController,
-//                               widgetBuilder: (BuildContext context,
-//                                   CurrentRemainingTime? time) {
-//                                 if (time!.sec == 1) {
-//                                   Navigator.pop(context);
-//                                 }
-//                                 return Text(
-//                                   '${time.sec! - 1}',
-//                                   style: TextStyle(
-//                                       fontSize: size.height * .025,
-//                                       fontWeight: FontWeight.bold),
-//                                 );
-//                               })
 
