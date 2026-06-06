@@ -19,7 +19,7 @@ https://www.behance.net/gallery/70684907/Kenko-Workout-tracker-app-UI-Kit?tracki
 
 Most important libraries :
 
--Getx
+-Getx state managment
 
 -Sqflie
 
